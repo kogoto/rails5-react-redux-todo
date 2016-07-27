@@ -11,6 +11,11 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+/client/node_modules
+/client/build
+/public/index.html
+/public/main.*.js
+/public/main.*.js.map
 
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
