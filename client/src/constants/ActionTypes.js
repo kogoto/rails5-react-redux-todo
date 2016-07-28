@@ -1,0 +1,5 @@
+export const CHANGE_ORDER = 'CHANGE_ORDER'
+export const CHANGE_TITLE = 'CHANGE_TITLE'
+export const ADD_TODO = 'ADD_TODO'
+export const DELETE_TODO = 'DELETE_TODO'
+export const TOGGLE_TODO = 'TOGGLE_TODO'

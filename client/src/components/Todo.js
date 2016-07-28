@@ -1,27 +1,24 @@
 import React, { Component, PropTypes } from 'react'
 
 export default class Todo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { completed: false }
-  }
-
   render() {
+    const { todo, onTodoCompleted, onTodoDelete } = this.props
+
     return (
-      <tr className={this.state.completed ? "table-success": ""}>
+      <tr className={todo.completed ? "table-success": ""}>
         <td>
           <input
             type="checkbox"
-            onChange={(e) => this.props.onTodoCompleted(this, e.target.checked)}
-            checked={this.state.completed ? "checked": ""}
+            onChange={() => onTodoCompleted(todo.id)}
+            checked={todo.completed ? "checked": ""}
           />
         </td>
-        <td>{this.props.order}</td>
-        <td>{this.props.title}</td>
+        <td>{todo.order}</td>
+        <td>{todo.title}</td>
         <td>
           <button
             className="btn btn-danger"
-            onClick={() => this.props.onTodoDelete(this.props.id)}
+            onClick={() => onTodoDelete(todo.id)}
           >削除</button>
         </td>
       </tr>
@@ -30,6 +27,7 @@ export default class Todo extends Component {
 }
 
 Todo.propTypes = {
+  todo: PropTypes.object.isRequired,
   onTodoCompleted: PropTypes.func.isRequired,
   onTodoDelete: PropTypes.func.isRequired
 }
