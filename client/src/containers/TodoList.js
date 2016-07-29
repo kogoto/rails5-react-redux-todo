@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { toggleTodo, deleteTodo } from '../actions'
+import * as actionCreators from '../actions/ui'
 import Todo from '../components/Todo'
 
 class TodoList extends Component {
   render() {
-    const { todos, toggleTodo, deleteTodo } = this.props
+    const { todos } = this.props
 
     let todoNodes = todos.map(todo => {
       return (
         <Todo
           key={todo.id}
           todo={todo}
-          onTodoCompleted={toggleTodo}
-          onTodoDelete={deleteTodo}
+          onUpdate={this.props.onUpdateTodo.bind(this)}
+          onDelete={this.props.onDeleteTodo.bind(this)}
         /> 
       )
     })
@@ -38,13 +38,18 @@ class TodoList extends Component {
   }
 }
 
+TodoList.propTypes = {
+  onUpdateTodo: PropTypes.func.isRequired,
+  onDeleteTodo: PropTypes.func.isRequired
+}
+
 const mapStateToProps = (state) => {
   return { todos: state.todos }
 }
 
 TodoList = connect(
   mapStateToProps,
-  { toggleTodo, deleteTodo }
+  actionCreators
 )(TodoList)
 
 export default TodoList

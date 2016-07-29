@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { changeOrder, changeTitle, addTodo } from '../actions'
+import * as actionCreators from '../actions/ui'
 
 class TodoForm extends Component {
   handleSubmit(e) {
@@ -9,7 +9,7 @@ class TodoForm extends Component {
 
   render() {
     const form = this.props.form
-    const { changeOrder, changeTitle, addTodo } = this.props
+    const { changeOrder, changeTitle, onAddTodo } = this.props
 
     return (
       <div className="row">
@@ -35,7 +35,7 @@ class TodoForm extends Component {
               className="btn btn-primary"
               type="submit"
               disabled={form.disabled}
-              onClick={() => addTodo(form)}>
+              onClick={() => onAddTodo(form)}>
               登録
             </button>
           </div>
@@ -45,13 +45,17 @@ class TodoForm extends Component {
   }
 }
 
+TodoForm.propTypes = {
+  onAddTodo: PropTypes.func.isRequired
+}
+
 const mapStateToProps = (state) => {
   return { form: state.form }
 }
 
 TodoForm = connect(
   mapStateToProps,
-  { changeOrder, changeTitle, addTodo }
+  actionCreators
 )(TodoForm)
 
 export default TodoForm

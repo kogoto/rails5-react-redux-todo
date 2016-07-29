@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions'
-import { CHANGE_ORDER, CHANGE_TITLE, ADD_TODO } from '../constants/ActionTypes'
+import * as UiAction from '../constants/ui'
+import * as ApiAction from '../constants/api'
 
 const initialState = {
   title: '',
@@ -9,18 +10,18 @@ const initialState = {
 }
 
 const form = handleActions({
-  [CHANGE_ORDER]: (state, action) => ({
+  [UiAction.CHANGE_ORDER]: (state, action) => ({
     ...state,
     order: action.payload
   }),
 
-  [CHANGE_TITLE]: (state, action) => ({
+  [UiAction.CHANGE_TITLE]: (state, action) => ({
     ...state,
     title: action.payload,
     disabled: action.payload.trim() === ''
   }),
 
-  [ADD_TODO]: (state, action) => initialState
+  [ApiAction.ADD_TODO]: (state, action) => initialState
 }, initialState)
 
 export default form
